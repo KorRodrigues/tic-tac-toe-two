@@ -9,7 +9,7 @@ interface StyledGridProps extends GridProps {
 }
 
 export const Cell = styled(Grid, {
-  shouldForwardProp: (prop) => prop !== 'bt' && prop !== 'br' && prop !== 'bb' && prop !== 'bl',
+  shouldForwardProp: (prop) => !['bt', 'br', 'bb', 'bl'].includes(prop.toString()),
 })<StyledGridProps>(({ bt, br, bb, bl, theme }) => ({
   alignItems: 'center',
   aspectRatio: '1 / 1',

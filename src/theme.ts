@@ -1,6 +1,7 @@
 import { Roboto } from '@next/font/google';
-import { createTheme } from '@mui/material/styles';
+import { createTheme, PaletteColor } from '@mui/material/styles';
 import { red } from '@mui/material/colors';
+import { green } from '@mui/material/colors';
 
 export const roboto = Roboto({
   weight: ['300', '400', '500', '700'],
@@ -9,15 +10,28 @@ export const roboto = Roboto({
   fallback: ['Helvetica', 'Arial', 'sans-serif'],
 });
 
+declare module '@mui/material/styles' {
+  interface Palette {
+    tertiary: PaletteColor;
+  }
+  // allow configuration using `createTheme`
+  interface PaletteOptions {
+    tertiary: PaletteColor;
+  }
+}
+
+const { palette } = createTheme();
+
 // Create a theme instance.
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#556cd6',
+      main: '#3949ab',
     },
     secondary: {
-      main: '#19857b',
+      main: '#d81b60',
     },
+    tertiary: palette.augmentColor({ color: green }),
     error: {
       main: red.A400,
     },

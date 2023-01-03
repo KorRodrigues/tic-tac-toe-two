@@ -1,4 +1,5 @@
 import { Grid, Card, CardContent } from '@mui/material';
+import Piece from '../../Piece/Piece';
 import * as S from './styles';
 
 const TicTacToeTable = () => (
@@ -6,13 +7,13 @@ const TicTacToeTable = () => (
     <CardContent>
       <Grid container>
         <S.Cell item xs={4} br bb>
-          x
+          <Piece size="p" player={1} />
         </S.Cell>
         <S.Cell item xs={4} br bb bl>
-          0
+          <Piece size="m" player={2} />
         </S.Cell>
         <S.Cell item xs={4} bb bl>
-          x
+          <Piece size="g" player={1} />
         </S.Cell>
         <S.Cell item xs={4} bt br bb>
           o

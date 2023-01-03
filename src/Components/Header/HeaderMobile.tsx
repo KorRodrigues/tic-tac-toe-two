@@ -17,8 +17,8 @@ const HeaderMobile = () => {
       <Box sx={{ flexGrow: 1 }}>
         <IconButton
           size="large"
-          aria-label="account of current user"
-          aria-controls="menu-appbar"
+          aria-label="menu"
+          aria-controls="menu-header"
           aria-haspopup="true"
           onClick={handleOpenNavMenu}
           color="inherit"
@@ -26,7 +26,7 @@ const HeaderMobile = () => {
           <MenuIcon />
         </IconButton>
         <Menu
-          id="menu-appbar"
+          id="menu-header"
           anchorEl={isMenuOpen}
           anchorOrigin={{
             vertical: 'bottom',

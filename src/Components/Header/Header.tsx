@@ -7,7 +7,7 @@ import HeaderMobile from './HeaderMobile';
 
 const Header = () => (
   <AppBar position="relative">
-    <Container maxWidth="xl">
+    <Container maxWidth="lg">
       <HeaderMobile />
       <HeaderDesktop />
     </Container>
