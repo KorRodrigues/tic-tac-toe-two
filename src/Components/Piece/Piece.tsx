@@ -6,7 +6,7 @@ type PieceProps = {
   size?: 'p' | 'm' | 'g';
   active?: boolean;
   selected?: boolean;
-  player: 1 | 2;
+  player: 0 | 1;
 };
 
 const Piece = ({ size, active, player, selected }: PieceProps) => (
@@ -16,8 +16,8 @@ const Piece = ({ size, active, player, selected }: PieceProps) => (
     player={player}
     variant={selected ? 'outlined' : 'elevation'}
   >
-    {player === 1 && <ClearIcon aria-label={`Peça ${size} do jogador 1`} />}
-    {player === 2 && <PanoramaFishEyeIcon aria-label={`Peça ${size} do jogador 2`} />}
+    {player === 0 && <ClearIcon aria-label={`Peça ${size} do jogador 1`} />}
+    {player === 1 && <PanoramaFishEyeIcon aria-label={`Peça ${size} do jogador 2`} />}
   </S.PieceCard>
 );
 

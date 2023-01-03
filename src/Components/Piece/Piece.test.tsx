@@ -6,12 +6,12 @@ describe('Piece', () => {
   it('renders all variations of pieces', () => {
     render(
       <>
+        <Piece size="p" player={0} />
+        <Piece size="m" player={0} />
+        <Piece size="g" player={0} />
         <Piece size="p" player={1} />
         <Piece size="m" player={1} />
         <Piece size="g" player={1} />
-        <Piece size="p" player={2} />
-        <Piece size="m" player={2} />
-        <Piece size="g" player={2} />
       </>
     );
 

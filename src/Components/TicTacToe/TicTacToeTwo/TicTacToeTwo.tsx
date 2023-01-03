@@ -15,13 +15,13 @@ const TicTacToeTwo = () => (
       </Typography>
     </Grid>
     <Grid item xs={12} md={3} lg={2}>
-      <Player player={1} />
+      <Player player={0} />
     </Grid>
     <Grid item xs={12} md={6} lg={8}>
       <TicTacToeTable />
     </Grid>
     <Grid item xs={12} md={3} lg={2}>
-      <Player player={2} />
+      <Player player={1} />
     </Grid>
   </Grid>
 );

@@ -4,7 +4,7 @@ import { styled } from '@mui/material/styles';
 interface StyledCardProps extends CardProps {
   size?: 'p' | 'm' | 'g';
   active?: boolean;
-  player: 1 | 2;
+  player: 0 | 1;
 }
 
 export const PieceCard = styled(Card, {
@@ -16,10 +16,10 @@ export const PieceCard = styled(Card, {
   color: theme.palette?.common?.white,
   display: 'flex',
   justifyContent: 'center',
-  ...(player === 1 && { background: theme.palette?.secondary?.main }),
-  ...(player === 2 && { background: theme.palette?.tertiary?.main }),
-  ...(size === 'p' && { width: '25%' }),
-  ...(size === 'm' && { width: '50%' }),
-  ...(size === 'g' && { width: '90%' }),
+  ...(player === 0 && { background: theme.palette?.secondary?.main }),
+  ...(player === 1 && { background: theme.palette?.tertiary?.main }),
+  ...(size === 'p' && { width: '25%', height: 'auto' }),
+  ...(size === 'm' && { width: '50%', height: 'auto' }),
+  ...(size === 'g' && { width: '90%', height: 'auto' }),
   ...(!active && { opacity: '0.3' }),
 }));

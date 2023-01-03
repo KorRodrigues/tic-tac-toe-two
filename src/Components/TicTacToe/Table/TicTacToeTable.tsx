@@ -7,13 +7,13 @@ const TicTacToeTable = () => (
     <CardContent>
       <Grid container>
         <S.Cell item xs={4} br bb>
-          <Piece size="p" player={1} />
+          <Piece size="p" player={0} />
         </S.Cell>
         <S.Cell item xs={4} br bb bl>
-          <Piece size="m" player={2} />
+          <Piece size="m" player={1} />
         </S.Cell>
         <S.Cell item xs={4} bb bl>
-          <Piece size="g" player={1} />
+          <Piece size="g" player={0} />
         </S.Cell>
         <S.Cell item xs={4} bt br bb>
           o
