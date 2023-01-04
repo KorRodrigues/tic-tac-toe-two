@@ -35,12 +35,17 @@ type GameState = {
       _3_3: BoardCell | null;
     };
   };
+  changeActivePlayer: (player: Player | null) => void;
+  selectSize: (size: Size) => void;
+  changeReduceFromStash: (player: Player, size: Size) => void;
+  setSizeToBoard: (player: Player, size: Size, boardName: BoardName) => void;
+  checkWin: () => void;
 };
 
 const useStore = create<GameState>()(
-  immer((set, get) => ({
+  immer((set) => ({
     game: {
-      activePlayer: 1,
+      activePlayer: 0,
       selectedSize: null,
       stash: [
         {
@@ -66,19 +71,20 @@ const useStore = create<GameState>()(
         _3_3: null,
       },
     },
-    changeActivePlayer: (player: Player | null) =>
+    changeActivePlayer: (player) =>
       set((state: GameState) => {
         state.game.activePlayer = player;
       }),
-    changeReduceFromStash: (player: Player, size: Size) =>
+    selectSize: (size) =>
+      set((state: GameState) => {
+        const player = state.game.activePlayer;
+        if (player && state.game.stash[player][size] > 0) state.game.selectedSize = size;
+      }),
+    changeReduceFromStash: (player, size) =>
       set((state: GameState) => {
         state.game.stash[player][size] -= 1;
       }),
-    selectSize: (player: Player, size: Size) =>
-      set((state: GameState) => {
-        if (state.game.stash[player][size] > 0) state.game.selectedSize = size;
-      }),
-    setSizeToBoard: (player: Player, size: Size, boardName: BoardName) =>
+    setSizeToBoard: (player, size, boardName) =>
       set((state: GameState) => {
         const actualSize = state.game.board[boardName]?.size;
 
@@ -93,11 +99,7 @@ const useStore = create<GameState>()(
         state.game.activePlayer = state.game.activePlayer === 1 ? 0 : 1;
         state.game.board[boardName] = { player, size };
       }),
-    checkWin: () =>
-      set((state: GameState) => {
-        const checkPlayer = state.game.activePlayer === 1 ? 0 : 1;
-        const board = state.game.board;
-      }),
+    checkWin: () => set((state: GameState) => {}),
   }))
 );
 

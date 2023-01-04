@@ -1,6 +1,6 @@
 import { Box, Grid } from '@mui/material';
 import Typography from '@mui/material/Typography';
-import Player from '../PlayerStash';
+import PlayerStash from '../PlayerStash';
 import TicTacToeTable from '../Table';
 import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft';
 import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
@@ -15,13 +15,13 @@ const TicTacToeTwo = () => (
       </Typography>
     </Grid>
     <Grid item xs={12} md={3} lg={2}>
-      <Player player={0} />
+      <PlayerStash player={0} />
     </Grid>
     <Grid item xs={12} md={6} lg={8}>
       <TicTacToeTable />
     </Grid>
     <Grid item xs={12} md={3} lg={2}>
-      <Player player={1} />
+      <PlayerStash player={1} />
     </Grid>
   </Grid>
 );

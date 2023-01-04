@@ -8,7 +8,8 @@ import {
   useTheme,
 } from '@mui/material';
 
-import Piece from '../../Piece/Piece';
+import useStore from '../../../zustand/tictactoetwo.store';
+import StashBox from './StashBox';
 
 type PlayerStashProps = {
   player: 0 | 1;
@@ -17,57 +18,33 @@ type PlayerStashProps = {
 const PlayerStash = ({ player }: PlayerStashProps) => {
   const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up('sm'));
+  const activePlayer = useStore((state) => state.game.activePlayer);
+
+  const isActivePlayer = activePlayer === player;
 
   return (
-    <Card>
+    <Card raised={isActivePlayer}>
       <CardHeader title={`Jogador ${player}`} />
       <CardContent>
         <Box
-          sx={
-            (!isDesktop && {
+          sx={{
+            ...((!isDesktop && {
               display: 'flex',
               flexDirection: 'row',
             }) ||
-            undefined
-          }
+              undefined),
+            opacity: isActivePlayer ? 1 : 0.5,
+          }}
         >
-          <Box
-            display="flex"
-            flexGrow={1}
-            justifyContent="center"
-            my={isDesktop ? 2 : 0}
-            mx={!isDesktop ? 2 : 0}
-          >
-            <Piece size="g" active={true} player={player} />
-          </Box>
+          <StashBox player={player} size="g" />
 
           <Divider orientation={isDesktop ? 'horizontal' : 'vertical'} variant="middle" flexItem />
 
-          <Box
-            display="flex"
-            flexGrow={1}
-            justifyContent="center"
-            mx={!isDesktop ? 2 : 0}
-            my={isDesktop ? 4 : 0}
-          >
-            <Box display="flex" flexGrow={1} justifyContent="center" alignItems="center">
-              <Piece size="m" active={true} player={player} />
-            </Box>
-          </Box>
+          <StashBox player={player} size="m" />
 
           <Divider orientation={isDesktop ? 'horizontal' : 'vertical'} variant="middle" flexItem />
 
-          <Box
-            display="flex"
-            flexGrow={1}
-            justifyContent="center"
-            mx={!isDesktop ? 2 : 0}
-            my={isDesktop ? 6 : 0}
-          >
-            <Box display="flex" flexGrow={1} justifyContent="center" alignItems="center">
-              <Piece size="p" active={true} player={player} />
-            </Box>
-          </Box>
+          <StashBox player={player} size="p" />
         </Box>
       </CardContent>
     </Card>

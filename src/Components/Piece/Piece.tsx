@@ -10,12 +10,7 @@ type PieceProps = {
 };
 
 const Piece = ({ size, active, player, selected }: PieceProps) => (
-  <S.PieceCard
-    size={size}
-    active={active}
-    player={player}
-    variant={selected ? 'outlined' : 'elevation'}
-  >
+  <S.PieceCard size={size} active={active} player={player} selected={selected}>
     {player === 0 && <ClearIcon aria-label={`Peça ${size} do jogador 1`} />}
     {player === 1 && <PanoramaFishEyeIcon aria-label={`Peça ${size} do jogador 2`} />}
   </S.PieceCard>
