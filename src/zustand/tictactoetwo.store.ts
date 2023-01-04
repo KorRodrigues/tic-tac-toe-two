@@ -11,8 +11,6 @@ type Stash = {
   g: number;
 };
 
-type BoardName = '_1_1' | '_1_2' | '_1_3' | '_2_1' | '_2_2' | '_2_3' | '_3_1' | '_3_2' | '_3_3';
-
 type BoardCell = {
   player: Player;
   size: Size;
@@ -20,32 +18,26 @@ type BoardCell = {
 
 type GameState = {
   game: {
-    activePlayer: Player | null;
+    activePlayer: Player;
+    winnerPlayer: Player | null;
     selectedSize: Size | null;
     stash: [Stash, Stash];
-    board: {
-      _1_1: BoardCell | null;
-      _1_2: BoardCell | null;
-      _1_3: BoardCell | null;
-      _2_1: BoardCell | null;
-      _2_2: BoardCell | null;
-      _2_3: BoardCell | null;
-      _3_1: BoardCell | null;
-      _3_2: BoardCell | null;
-      _3_3: BoardCell | null;
-    };
+    board: [
+      [BoardCell | null, BoardCell | null, BoardCell | null],
+      [BoardCell | null, BoardCell | null, BoardCell | null],
+      [BoardCell | null, BoardCell | null, BoardCell | null]
+    ];
   };
-  changeActivePlayer: (player: Player | null) => void;
+  changeActivePlayer: (player: Player) => void;
   selectSize: (size: Size) => void;
-  changeReduceFromStash: (player: Player, size: Size) => void;
-  setSizeToBoard: (player: Player, size: Size, boardName: BoardName) => void;
-  checkWin: () => void;
+  setSizeToBoardAndCheckWin: (boardRow: number, boardColumn: number) => void;
 };
 
 const useStore = create<GameState>()(
   immer((set) => ({
     game: {
       activePlayer: 0,
+      winnerPlayer: null,
       selectedSize: null,
       stash: [
         {
@@ -59,17 +51,11 @@ const useStore = create<GameState>()(
           g: 2,
         },
       ],
-      board: {
-        _1_1: null,
-        _1_2: null,
-        _1_3: null,
-        _2_1: null,
-        _2_2: null,
-        _2_3: null,
-        _3_1: null,
-        _3_2: null,
-        _3_3: null,
-      },
+      board: [
+        [null, null, null],
+        [null, null, null],
+        [null, null, null],
+      ],
     },
     changeActivePlayer: (player) =>
       set((state: GameState) => {
@@ -78,28 +64,50 @@ const useStore = create<GameState>()(
     selectSize: (size) =>
       set((state: GameState) => {
         const player = state.game.activePlayer;
-        if (player && state.game.stash[player][size] > 0) state.game.selectedSize = size;
+        if (player != null && state.game.stash[player][size] > 0) state.game.selectedSize = size;
       }),
-    changeReduceFromStash: (player, size) =>
+    setSizeToBoardAndCheckWin: (boardRow, boardColumn) =>
       set((state: GameState) => {
-        state.game.stash[player][size] -= 1;
-      }),
-    setSizeToBoard: (player, size, boardName) =>
-      set((state: GameState) => {
-        const actualSize = state.game.board[boardName]?.size;
+        const board = state.game.board;
+        const player = state.game.activePlayer;
+        const winner = state.game.winnerPlayer;
+        const selectedSize = state.game.selectedSize;
+        const actualSize = state.game.board[boardRow][boardColumn]?.size;
+        const stash = state.game.stash;
 
         if (
+          winner != null ||
+          player == null ||
+          selectedSize == null ||
+          stash[player][selectedSize] <= 0 ||
           actualSize === 'g' ||
-          (actualSize === 'm' && size === 'g') ||
-          (actualSize === 'p' && size !== 'p')
+          (actualSize === 'm' && selectedSize !== 'g') ||
+          (actualSize === 'p' && selectedSize === 'p')
         )
           return;
 
+        state.game.stash[player][selectedSize] -= 1;
         state.game.selectedSize = null;
-        state.game.activePlayer = state.game.activePlayer === 1 ? 0 : 1;
-        state.game.board[boardName] = { player, size };
+        state.game.board[boardRow][boardColumn] = { player, size: selectedSize };
+
+        if (
+          (board[0][0]?.player === player &&
+            ((board[0][1]?.player === player && board[0][2]?.player === player) || // ->
+              (board[1][1]?.player === player && board[2][2]?.player === player) || // -> V
+              (board[1][0]?.player === player && board[2][0]?.player === player))) || // V
+          (board[1][1]?.player === player &&
+            ((board[1][0]?.player === player && board[1][2]?.player === player) || // <->
+              (board[0][1]?.player === player && board[2][1]?.player === player) || // ^V
+              (board[2][0]?.player === player && board[0][2]?.player === player))) || // ->^
+          (board[2][2]?.player === player &&
+            ((board[2][0]?.player === player && board[2][1]?.player === player) || // <-
+              (board[0][2]?.player === player && board[1][2]?.player === player))) // ^
+        ) {
+          state.game.winnerPlayer = player;
+        } else {
+          state.game.activePlayer = state.game.activePlayer === 1 ? 0 : 1;
+        }
       }),
-    checkWin: () => set((state: GameState) => {}),
   }))
 );
 

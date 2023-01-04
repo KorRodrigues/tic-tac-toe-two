@@ -24,7 +24,7 @@ const PlayerStash = ({ player }: PlayerStashProps) => {
 
   return (
     <Card raised={isActivePlayer}>
-      <CardHeader title={`Jogador ${player}`} />
+      <CardHeader title={`Jogador ${player + 1}`} />
       <CardContent>
         <Box
           sx={{

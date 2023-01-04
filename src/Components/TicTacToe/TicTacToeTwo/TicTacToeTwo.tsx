@@ -1,18 +1,12 @@
-import { Box, Grid } from '@mui/material';
-import Typography from '@mui/material/Typography';
+import { Grid } from '@mui/material';
 import PlayerStash from '../PlayerStash';
 import TicTacToeTable from '../Table';
-import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft';
-import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
+import TableState from '../TableState';
 
 const TicTacToeTwo = () => (
   <Grid container maxWidth="lg" spacing={2}>
     <Grid item xs={12} display="flex" justifyContent="center">
-      <Typography variant="h4" component="h2" gutterBottom>
-        <ArrowCircleLeftIcon color="secondary" />
-        Turno do Jogador 1
-        <ArrowCircleRightIcon color="tertiary" />
-      </Typography>
+      <TableState />
     </Grid>
     <Grid item xs={12} md={3} lg={2}>
       <PlayerStash player={0} />

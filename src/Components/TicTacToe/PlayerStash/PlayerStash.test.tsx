@@ -6,4 +6,6 @@ describe('PlayerStash', () => {
   it('renders player 1 Stash', () => {
     render(<PlayerStash player={0} />);
   });
+
+  // TODO
 });
