@@ -15,19 +15,27 @@ const TableState = () => {
   );
 
   return (
-    <Typography variant="h4" component="h2" gutterBottom>
+    <Typography component="h2" gutterBottom sx={{ typography: { sm: 'h4', xs: 'h6' } }}>
       {winnerPlayer != null && (
         <>
-          {activePlayer === 0 && <ArrowCircleLeftIcon color="secondary" />}
+          {activePlayer === 0 && (
+            <ArrowCircleLeftIcon color="secondary" fontSize="inherit" sx={{ mb: '-3px' }} />
+          )}
           Jogador {activePlayer + 1} venceu!
-          {activePlayer === 1 && <ArrowCircleRightIcon color="tertiary" />}
+          {activePlayer === 1 && (
+            <ArrowCircleRightIcon color="tertiary" fontSize="inherit" sx={{ mb: '-3px' }} />
+          )}
         </>
       )}
       {winnerPlayer == null && (
         <>
-          {activePlayer === 0 && <ArrowCircleLeftIcon color="secondary" />}
+          {activePlayer === 0 && (
+            <ArrowCircleLeftIcon color="secondary" fontSize="inherit" sx={{ mb: '-3px' }} />
+          )}
           Turno do Jogador {activePlayer + 1}
-          {activePlayer === 1 && <ArrowCircleRightIcon color="tertiary" />}
+          {activePlayer === 1 && (
+            <ArrowCircleRightIcon color="tertiary" fontSize="inherit" sx={{ mb: '-3px' }} />
+          )}
         </>
       )}
     </Typography>

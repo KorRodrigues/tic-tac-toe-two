@@ -41,12 +41,12 @@ const useStore = create<GameState>()(
       selectedSize: null,
       stash: [
         {
-          p: 4,
+          p: 3,
           m: 3,
           g: 2,
         },
         {
-          p: 4,
+          p: 3,
           m: 3,
           g: 2,
         },
@@ -107,6 +107,8 @@ const useStore = create<GameState>()(
         } else {
           state.game.activePlayer = state.game.activePlayer === 1 ? 0 : 1;
         }
+
+        // TODO check tie
       }),
   }))
 );

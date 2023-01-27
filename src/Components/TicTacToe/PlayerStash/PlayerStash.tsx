@@ -17,14 +17,17 @@ type PlayerStashProps = {
 
 const PlayerStash = ({ player }: PlayerStashProps) => {
   const theme = useTheme();
-  const isDesktop = useMediaQuery(theme.breakpoints.up('sm'));
+  const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
   const activePlayer = useStore((state) => state.game.activePlayer);
 
   const isActivePlayer = activePlayer === player;
 
   return (
     <Card raised={isActivePlayer}>
-      <CardHeader title={`Jogador ${player + 1}`} />
+      <CardHeader
+        title={`Jogador ${player + 1}`}
+        titleTypographyProps={{ sx: { typography: { sm: 'h4', xs: 'h6' } } }}
+      />
       <CardContent>
         <Box
           sx={{
