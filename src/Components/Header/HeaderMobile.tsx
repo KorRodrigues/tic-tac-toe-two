@@ -40,8 +40,8 @@ const HeaderMobile = () => {
           open={!!isMenuOpen}
           onClose={handleCloseNavMenu}
         >
-          {pages.map((page) => (
-            <MenuItem key={page} onClick={handleCloseNavMenu}>
+          {pages.map((page, index) => (
+            <MenuItem key={index} onClick={handleCloseNavMenu}>
               <Typography textAlign="center">{page}</Typography>
             </MenuItem>
           ))}

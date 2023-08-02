@@ -22,8 +22,8 @@ const HeaderDesktop = () => (
       Jogo da Velha 2
     </Typography>
     <Box sx={{ flexGrow: 1 }} display="flex">
-      {pages.map((page) => (
-        <Button key={page} sx={{ my: 2, color: 'white', display: 'block' }}>
+      {pages.map((page, index) => (
+        <Button key={index} sx={{ my: 2, color: 'white', display: 'block' }}>
           {page}
         </Button>
       ))}

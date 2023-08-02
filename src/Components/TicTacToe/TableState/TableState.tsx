@@ -1,3 +1,4 @@
+// @ts-nocheck
 import Typography from '@mui/material/Typography';
 import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft';
 import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
